@@ -46,7 +46,7 @@ def MainMenu():
 @route('/video/queue/section')
 def Section(title, key):
     
-    oc = ObjectContainer(title2=title)
+    oc = ObjectContainer(title1= NAME, title2=title)
     
     if not 'X-Plex-Token' in Request.Headers:
         oc.header = 'No X-Plex-Token'
@@ -62,6 +62,11 @@ def Section(title, key):
         thumb = video.get('thumb','none')
         url = video.get('url','none')
         
+        media = video.find('Media')
+        
+        part = media.find('Part')
+        part_key = part.get('key','')
+        
         Log.Debug(title)
         #Log.Debug(summary)
         #Log.Debug(thumb)
@@ -74,7 +79,16 @@ def Section(title, key):
             url = url,
             title = title,
             summary = summary,
-            thumb = Resource.ContentsOfURLWithFallback(url=thumb)
+            thumb = Resource.ContentsOfURLWithFallback(url=thumb),
+            items = [
+                MediaObject(
+                    parts = [
+                        PartObject(
+                            key = part_key
+                        )
+                    ]
+                )
+            ]
         ))
     
     return oc
