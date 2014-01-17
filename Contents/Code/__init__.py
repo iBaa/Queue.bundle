@@ -4,7 +4,6 @@ BASE_URL = "https://www.plex.tv/pms/playlists/queue"
 
 ####################################################################################################
 def Start():
-    Plugin.AddPrefixHandler("/video/Queue", MainMenu, 'Queue', 'icon-default.png', 'art-default.png')
     
     HTTP.CacheTime = 0 # in sec - was (=3600): CACHE_1HOUR
     HTTP.Headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:22.0) Gecko/20100101 Firefox/22.0'
