@@ -4,8 +4,8 @@ BASE_URL = "https://www.plex.tv/pms/playlists/queue"
 
 ####################################################################################################
 def Start():
-    Plugin.AddPrefixHandler("/video/Queue", MainMenu, 'Queue', 'icon-default.png', 'art-default.png')
     
+    ObjectContainer.title1 = NAME
     HTTP.CacheTime = 0 # in sec - was (=3600): CACHE_1HOUR
     HTTP.Headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:22.0) Gecko/20100101 Firefox/22.0'
     HTTP.Headers['X-Requested-With'] = 'XMLHttpRequest'
@@ -14,7 +14,7 @@ def Start():
 @handler('/video/queue', NAME)
 def MainMenu():
 
-    oc = ObjectContainer(title1=NAME)
+    oc = ObjectContainer()
 
     if not Client.Platform in ('iOS', ) and not (Client.Platform == 'Safari' and Platform.OS == 'MacOSX'):
         oc.header = 'Not supported'
@@ -46,7 +46,7 @@ def MainMenu():
 @route('/video/queue/section')
 def Section(title, key):
     
-    oc = ObjectContainer(title1= NAME, title2=title)
+    oc = ObjectContainer(title2=title)
     
     if not 'X-Plex-Token' in Request.Headers:
         oc.header = 'No X-Plex-Token'
