@@ -1,4 +1,6 @@
 NAME = "Queue"
+ART = "art-default.png"
+ICON = "icon-default.png"
 
 BASE_URL = "https://www.plex.tv/pms/playlists/queue"
 
@@ -6,6 +8,9 @@ BASE_URL = "https://www.plex.tv/pms/playlists/queue"
 def Start():
     
     ObjectContainer.title1 = NAME
+    ObjectContainer.art = R(ART)
+    DirectoryObject.thumb = R(ICON)
+    
     HTTP.CacheTime = 0 # in sec - was (=3600): CACHE_1HOUR
     HTTP.Headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:22.0) Gecko/20100101 Firefox/22.0'
     HTTP.Headers['X-Requested-With'] = 'XMLHttpRequest'
